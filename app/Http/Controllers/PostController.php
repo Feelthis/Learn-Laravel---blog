@@ -65,7 +65,9 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view('posts.show')->with('post', $post);
+        $updated_at_ago = Post::time_elapsed_string($post->updated_at, true);
+//        return view('posts.show')->with('post', $post);
+        return view('posts.show', ['post'=> $post, 'updated_at_ago'=> $updated_at_ago]);
     }
 
     /**
