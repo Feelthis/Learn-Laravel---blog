@@ -11,8 +11,15 @@
 |
 */
 
+//Route::get('blog/{slug}/{id}', ['as'=>'blog.single', 'uses'=>'BlogController@getSingle']);
+Route::get('blog/{slug}', 'BlogController@getSingle')->name('blog.single')->where('slug', '[\w\d\-\_]+');
+Route::get('blog', 'BlogController@getIndex')->name('blog.index');
 Route::get('contact', 'PagesController@getContact');
 Route::get('about', 'PagesController@getAbout');
 Route::get('/', 'PagesController@getIndex');
 Route::resource('posts', 'PostController');
 
+//\Illuminate\Support\Facades\Auth::routes()
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

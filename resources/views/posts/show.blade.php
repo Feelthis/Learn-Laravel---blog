@@ -13,14 +13,18 @@
         <div class="col-md-4">
             <div class="well">
                 <dl class="dl-horizontal">
-                    <dt>Created At:</dt>
-                    <dd>{{ date('M j, Y H:i', strtotime($post->created_at)) }}</dd>
+                    <label>Url:</label>
+                    <p><a href="{{ route('blog.single', ['slug'=> $post->slug]) }}">{{ route('blog.single', ['slug'=> $post->slug]) }}</a></p>
+                </dl>
+                <dl class="dl-horizontal">
+                    <label>Created At:</label>
+                    <p>{{ date('M j, Y H:i', strtotime($post->created_at)) }}</p>
                 </dl>
 
                 <dl class="dl-horizontal">
-                    <dt>Last Updated:</dt>
+                    <label>Last Updated:</label>
 {{--                    <dd>{{ date('M j, Y H:i', strtotime($post->updated_at)) }}</dd>--}}
-                    <dd>{{ $updated_at_ago }}</dd>
+                    <p>{{ $updated_at_ago }}</p>
                 </dl>
 
                 <hr>
@@ -32,9 +36,16 @@
                             {!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class'=>'btn btn-primary btn-block')) !!}
                         </div>
                         <div class="col-sm-6">
-                            {!! Html::linkRoute('posts.destroy', 'Delete', array($post->id), array('class'=>'btn btn-danger btn-block')) !!}
-                            {{--{!! Html::linkRoute('post.delete') !!}--}}
-                            {{--<a href="#" class="btn btn-danger btn-block">Delete</a>--}}
+                            {!! Form::open(['route'=> ['posts.destroy', $post->id], 'method'=> 'DELETE']) !!}
+{{--                            {!! Html::linkRoute('posts.destroy', 'Delete', array($post->id), array('class'=>'btn btn-danger btn-block')) !!}--}}
+                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-clock']) !!}
+
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            {!! Html::linkRoute('posts.index', '<< See All posts', [], array('class'=>'btn btn-default btn-block btn-h1-spacing')) !!}
                         </div>
                     </div>
                 </div>
